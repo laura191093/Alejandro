@@ -1,0 +1,179 @@
+<!DOCTYPE html-->
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.mobile-1.4.5.min.js"></script>
+<title>Aplicacion Movil </title>
+  <script>
+          $(document).ready(function inicio(){
+    // 
+     var btnEnvio=$("#enviar");
+     btnEnvio.click(function enviarDatos(){
+         var m=$("#Mc").val();
+          var p1=$("#P1").val();
+           var p2=$("#P2").val();
+           var p3=$("#P3").val();
+           var p4=$("#P4").val();
+           var pro=$("#P").val();
+           
+      $.ajax({
+          type:"POST",
+          url:"http://laura1910933.260mb.net/calificacion.php",
+          data:"Matricula="+m+"&Parcial1="+p1+"&Parcial2="+p2+"&Parcial3="+p3+"&Parcial4="+p4+"&Promedio="+pro,
+          success:recepcion
+      });
+     });
+     function recepcion(datos){
+      //   alert("listo:"+datos);
+         var resp=$("#respuesta");
+         resp.html(datos);
+     }
+     
+     
+     var btnpromedio=$("#promedio");
+btnpromedio.click(function promedio(){
+var n1=parseInt($("#P1").val());
+var n2=parseInt($("#P2").val());
+var n3=parseInt($("#P3").val());
+var n4=parseInt($("#P4").val());
+var result=(n1+n2+n3+n4)/4;
+var r=$("#P");
+r.val(result);
+});
+     
+     
+     
+     
+     var btnEnvio2=$("#enviar2");
+     btnEnvio2.click(function enviarDatos2(){         
+         var n=$("#N").val();
+          var ap=$("#AP").val();
+           var am=$("#AM").val();
+           var m2=$("#M2").val();
+           var CURP=$("#CURP").val();
+           var c=$("#C").val();
+           var s=$("#S").val();
+           var g=$("#G").val();
+           
+      $.ajax({
+          type:"POST",
+          url:"http://laura1910933.260mb.net/alumno.php",
+          data:"Nombre="+n+"&ApellidoPaterno="+ap+"&ApellidoMaterno="+am+"&Matricula2="+m2+"&CURP="+CURP+"&Carrera="+c+"&Semestre="+s+"&Grupo="+g,
+          success:recepcion2
+      });
+     });
+     function recepcion2(datos){
+      //   alert("listo:"+datos);
+         var resp2=$("#respuesta2");
+         resp2.html(datos);
+     }
+    });
+    
+  </script>
+
+
+</head>
+<body>
+<div data-role="page" id="Inicio" data-theme="b">
+    <div data-role="header">
+        <p style="text-align:center">Inicio</p>
+        <a href="#Alumno" > Alumno</a>
+           <a href="#Calificaciones" >Calificación</a>
+    </div>
+    <div data-role="Content">
+        <Center>  <h1>Alejandro Valerio Sanchez</h1>  
+        <h2>Ingenieria en Sistemas Computacionales</h2>
+        <h3>Desarrollo de Aplicaciones Moviles II</h3>
+        </Center>              
+        </div>
+</div>
+
+    
+  
+ 
+ 
+ <div data-role="page" id="Alumno" data-theme="b">
+    <div data-role="header">
+        <p style="text-align:center"> Alumno</p>
+         <a href="#Inicio">Inicio</a></li>
+            <a href="#Calificaciones">Calificación</a>
+    </div>
+    <div data-role="Content">
+        
+        <form method="POST" action="alumno.php">
+            
+    <label for="N">Nombre: </label>
+    <input type="text" value="" name="N" id='N'/><br>
+
+    <label for="AP">Apellido Paterno: </label>
+    <input type="text" name="AP" id='AP'/><br>
+    
+    <label for="AM">Apellido Materno: </label>
+    <input type="text" name="AM" id='AM'/><br>
+    
+    <label for="M2">Matricula: </label>
+    <input type="text" value="" name="M2" id='M2'/><br>
+
+    <label for="CURP">CURP: </label>
+    <input type="text" value="" name="CURP" id='CURP' /><br>
+
+     <label for="C">Carrera: </label>
+    <input type="text" value="" name="C" id='C' /><br>
+    
+    <label for="S">Semestre: </label>
+    <input type="text" value="" name="S" id='S' /><br>
+      
+      <label for="G">Grupo: </label>
+    <input type="text" value="" name="G" id='G' /><br><br>
+            <input type="button" name="enviar2" id="enviar2" value="Enviar">
+           
+            <div id="respuesta2">
+            
+        </div>
+        </form>
+        
+    </div>
+    </div>
+    
+
+<div data-role="page" id="Calificaciones" data-theme="b">
+    <div data-role="header">
+        <p style="text-align:center">Calificaciones</p>
+        <a href="#Alumno">Alumno</a>
+            <a href="#Inicio">Inicio</a>
+    </div>
+    <div data-role="Content">
+        
+        <form method="POST" action="calificacion.php">
+            <div class="ui-field-contain">
+                 <label for="Mc">Matricula: </label>
+                <input type="text" value="" name="Mc" id='Mc'/><br><br>
+                <label for="P1">Parcial 1: </label>
+                <input type="text" value="" name="P1" id='P1'/> <br>
+                <label for="P2">Parcial 2: </label>
+                <input type="text" value="" name="P2" id='P2'/><br>
+                <label for="P3">Parcial 3: </label>
+                <input type="text" value="" name="P3" id='P3'/><br>
+                <label for="P4">Parcial 4: </label>
+                <input type="text" value="" name="P4" id='P4'/><br>
+                <label for="P">Promedio: </label>
+                <input type="text" value="" name="P" id="P"/><br>
+
+                <input type="button" value="Promedio" id="promedio"/>
+               
+            </div>
+            <input type="button"name="enviar" id="enviar" value="Enviar">
+            
+            
+        </form>
+        <div id="respuesta">
+            
+        </div>
+ 
+    </div>
+    
+</div>  
+</body>
+</html>
